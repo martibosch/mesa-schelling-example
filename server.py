@@ -1,5 +1,6 @@
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.modules import CanvasGrid, ChartModule, TextElement
+from mesa.visualization.UserParam import UserSettableParameter
 
 from model import SchellingModel
 
@@ -19,7 +20,7 @@ def schelling_draw(agent):
     '''
     if agent is None:
         return
-    portrayal = {"Shape": "circle", "r": 0.5, "Filled": "true", "Layer": 0}
+    portrayal = {"Shape": "rect", "w": 1, "h": 1, "Filled": "true", "Layer": 0}
 
     if agent.type == 0:
         portrayal["Color"] = "Red"
@@ -27,11 +28,21 @@ def schelling_draw(agent):
         portrayal["Color"] = "Blue"
     return portrayal
 
+
 happy_element = HappyElement()
-canvas_element = CanvasGrid(schelling_draw, 20, 20, 500, 500)
+canvas_element = CanvasGrid(schelling_draw, 40, 40, 500, 500)
 happy_chart = ChartModule([{"Label": "happy", "Color": "Black"}])
+
+model_params = {
+    "height": 40,
+    "width": 40,
+    "density": UserSettableParameter(
+        "slider", "Agent density", 0.9, 0.1, 1.0, 0.1),
+    "minority_pc": UserSettableParameter(
+        "slider", "Fraction minority", 0.4, 0.00, 1.0, 0.05),
+    "homophily": UserSettableParameter("slider", "Homophily", 4, 0, 8, 1)
+}
 
 server = ModularServer(SchellingModel,
                        [canvas_element, happy_element, happy_chart],
-                       "Schelling’s Segregation Model",
-                       20, 20, 0.8, 0.2, 4)
+                       "Schelling’s Segregation Model", model_params)
