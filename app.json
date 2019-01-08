@@ -1,0 +1,7 @@
+{
+  "name": "Mesa Schelling Model",
+  "description": "Implementation of the Schelling segregation model with the Mesa Python library, easily be deployable to Heroku.",
+  "image": "heroku/python",
+  "repository": "https://github.com/martibosch/mesa-schelling-example",
+  "keywords": ["python", "mesa", "schelling" ]
+}
