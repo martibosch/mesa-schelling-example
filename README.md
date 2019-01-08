@@ -1,5 +1,7 @@
 *Note: This is an example repo to demostrate a stand alone model, outside of the Mesa code base.*
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 # Schelling Segregation Model
 
 ## Summary
